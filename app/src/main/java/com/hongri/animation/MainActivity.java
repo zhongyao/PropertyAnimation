@@ -15,6 +15,7 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity implements OnClickListener {
     private ImageView iv;
     private Button animBtn;
+    private Button changeWidthBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         iv = findViewById(R.id.iv);
         animBtn = findViewById(R.id.animBtn);
+        changeWidthBtn = findViewById(R.id.changeWidthBtn);
         animBtn.setOnClickListener(this);
+        changeWidthBtn.setOnClickListener(this);
 
     }
 
@@ -32,11 +35,20 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         switch (v.getId()) {
             case R.id.animBtn:
                 //animTranslationY();
-                animRotationY();
+                //TestURL.addShareKeyToUrl("pages/play/play?source=youkuapp&videoId=5565","$#$343");
+                //animRotationY();
+                break;
+            case R.id.changeWidthBtn:
+                performAnimate();
                 break;
             default:
                 break;
         }
+    }
+
+    private void performAnimate() {
+        ViewWrapper wrapper = new ViewWrapper(changeWidthBtn);
+        ObjectAnimator.ofInt(wrapper,"width",500).setDuration(5000).start();
     }
 
     private void animTranslationY() {
@@ -45,9 +57,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         animator.start();
     }
 
-    private void animRotationY(){
-        ObjectAnimator animator = ObjectAnimator.ofFloat(iv,"rotationX",0,360);
+    private void animRotationY() {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(iv, "rotationX", 0, 360);
         animator.setDuration(2000);
         animator.start();
     }
+
 }
